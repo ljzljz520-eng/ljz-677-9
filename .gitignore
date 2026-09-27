@@ -23,3 +23,8 @@ __pycache__/
 *.log
 .env
 .env.*
+
+# 水质上报系统运行数据（上传文件、任务 JSONL、样本文件）
+data/uploads/
+data/jobs/
+data/samples/

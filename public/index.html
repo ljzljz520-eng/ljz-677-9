@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>水质检测 Excel 上报系统</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>水质检测 Excel 上报系统</h1>
+    <span class="subtitle">流式分批解析 · 后端校验 · 平台上报 · 异常回收</span>
+  </header>
+
+  <main class="container">
+    <!-- 上传区 -->
+    <section class="card" id="uploadCard">
+      <h2>1. 上传检测数据</h2>
+      <div class="upload-box" id="dropZone">
+        <input type="file" id="fileInput" accept=".xlsx,.csv" hidden />
+        <p class="upload-hint">拖拽 Excel(.xlsx) / CSV 到此处，或</p>
+        <button class="btn primary" id="pickBtn">选择文件</button>
+        <p class="upload-meta" id="fileMeta"></p>
+      </div>
+      <div class="template-hint">
+        表头需含：<code>采样点编码</code> <code>指标编码</code> <code>数值</code> <code>单位</code> <code>采样时间</code>
+        <button class="btn link" id="refBtn">查看合法编码/单位</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="uploadBtn" disabled>开始上传并上报</button>
+        <button class="btn danger ghost" id="cancelBtn" hidden>取消任务</button>
+      </div>
+    </section>
+
+    <!-- 进度区 -->
+    <section class="card" id="progressCard" hidden>
+      <h2>2. 处理进度</h2>
+      <div class="job-meta" id="jobMeta"></div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <span>① 解析与校验</span><span id="parsePct">0%</span>
+        </div>
+        <div class="bar"><div class="fill parse" id="parseBar"></div></div>
+        <div class="phase-sub" id="parseSub">等待开始…</div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <span>② 平台上报</span><span id="reportPct">0%</span>
+        </div>
+        <div class="bar"><div class="fill report" id="reportBar"></div></div>
+        <div class="phase-sub" id="reportSub">等待校验完成…</div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+      <div class="actions">
+        <button class="btn" id="reportBtn" disabled>下载 Excel 报告</button>
+      </div>
+    </section>
+
+    <!-- 明细 -->
+    <section class="card" id="detailCard" hidden>
+      <h2>3. 结果明细</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="anomalies">平台异常 <span class="badge danger" id="cntAnomalies">0</span></button>
+        <button class="tab" data-tab="errors">校验失败 <span class="badge warn" id="cntErrors">0</span></button>
+        <button class="tab" data-tab="failed">上报失败 <span class="badge mute" id="cntFailed">0</span></button>
+      </div>
+      <div id="detailBody"></div>
+      <div class="pager">
+        <button class="btn small" id="prevPage">上一页</button>
+        <span id="pageInfo">1 / 1</span>
+        <button class="btn small" id="nextPage">下一页</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 参考数据弹层 -->
+  <div class="modal" id="refModal" hidden>
+    <div class="modal-body">
+      <button class="modal-close" id="refClose">×</button>
+      <h3>合法编码与单位</h3>
+      <div id="refContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

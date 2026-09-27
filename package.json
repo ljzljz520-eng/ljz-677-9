@@ -1,0 +1,21 @@
+{
+  "name": "water-quality-excel-system",
+  "version": "1.0.0",
+  "description": "水质检测 Excel 上报系统：超大文件流式分批解析、校验、平台上报与异常回收",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "gen:sample": "node scripts/generate-sample.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "yauzl": "^2.10.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

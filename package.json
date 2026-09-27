@@ -1,0 +1,12 @@
+{
+  "name": "water-quality-excel-report",
+  "version": "1.0.0",
+  "description": "水质检测 Excel 分批解析/校验/上送平台/异常回收 系统",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "sample": "node tools/generate-sample.js",
+    "sample:big": "node tools/generate-sample.js 50000"
+  },
+  "license": "MIT"
+}
